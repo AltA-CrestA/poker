@@ -1,0 +1,4104 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api (SOCKET) for mobile application Akpoker",
+        "version": "0.01",
+        "title": "AKPOKER SOCKET API"
+    },
+    "basePath": "/socket",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+        "/users/{id}/tables": {
+            "get": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Получить столы пользователя",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the user",
+                        "required": true,
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SocketClubTable"
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                }
+                            } 
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/view": {
+            "get": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Получить стол",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the table_id",
+                        "required": true,
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketClubTable"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                }
+                            } 
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/watch": {
+            "post": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Присоединиться к столу зрителем",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Join data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 367
+                                },
+                                "club_id": {
+                                    "type": "integer",
+                                    "example": 167
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/auto-extend": {
+            "put": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Автопродление стола",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketClubTable"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}": {
+            "delete": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Удаление стола",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/access-join/{userId}": {
+            "get": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Проверка на возможность подключения пользователя",
+                "description": "Состоит ли он в других играх на данный момент",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the table",
+                        "required": true,
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "description": "Id of the user",
+                        "required": true,
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketClubTable"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/join": {
+            "post": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Присоединиться к столу (сесть играть)",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Join data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 357
+                                },
+                                "club_id": {
+                                    "type": "integer",
+                                    "example": 157
+                                },
+                                "position": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "ip": {
+                                    "type": "string",
+                                    "example": "127.0.0.1"
+                                },
+                                "latitude": {
+                                    "type": "number",
+                                    "example": "56.123"
+                                },
+                                "longitude": {
+                                    "type": "number",
+                                    "example": "92.123"
+                                },
+                                "send_push": {
+                                    "type": "boolean",
+                                    "example": false
+                                }
+                            },
+                            "required": [
+                              "club_id",
+                              "table_id",
+                              "user_id",
+                              "position"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                    
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/register-queue": {
+            "post": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Встать в очередь",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Register queue data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 357
+                                },
+                                "club_id": {
+                                    "type": "integer",
+                                    "example": 157
+                                },
+                                "ip": {
+                                    "type": "string",
+                                    "example": "127.0.0.1"
+                                },
+                                "latitude": {
+                                    "type": "number",
+                                    "example": "56.123"
+                                },
+                                "longitude": {
+                                    "type": "number",
+                                    "example": "92.123"
+                                }
+                            },
+                            "required": [
+                                "club_id",
+                                "user_id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketViewer"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tables/{id}/remove-queue": {
+            "put": {
+                "tags" : [
+                    "table"
+                ],
+                "summary": "Удалить зрителя из очереди",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "description": "Id of the table",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Remove from queue data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 357
+                                },
+                                "club_id": {
+                                    "type": "integer",
+                                    "example": 157
+                                }
+                            },
+                            "required": [
+                                "club_id",
+                                "user_id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketClubTable"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games": {
+            "get": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Получить игры пользователя",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "query",
+                        "description": "Id of the user",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SocketGame"
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                    
+                                      
+                                    }
+                                }
+                            } 
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}": {
+            "get": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Получить игру",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                    
+                                      
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Обновление игры",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": " data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                      
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Удалить игру",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                    
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/leave": {
+            "post": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Покинуть игру",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": " data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                },
+                                "is_bot": {
+                                    "type": "boolean",
+                                    "example": false
+                                }
+                            },
+                            "required": [
+                              "user_id"  
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/watch": {
+            "post": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Стать зрителем игры",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Watch data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                },
+                                "is_bot": {
+                                    "type": "boolean",
+                                    "example": false
+                                }
+                            },
+                            "required": [
+                              "user_id"  
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGame"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/set-status-out-game": {
+            "put": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Установить статус игрока - OUT_GAME",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "State data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                }
+                            },
+                            "required": [
+                              "user_id",
+                              "amount" 
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/set-status-disconnected": {
+            "put": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Установить статус игрока - DISCONNECTED",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "State data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                }
+                            },
+                            "required": [
+                              "user_id",
+                              "amount" 
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/buy-in": {
+            "post": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Buy-in",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Buy-in data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "example": 1
+                                }
+                            },
+                            "required": [
+                              "user_id",
+                              "amount" 
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/time-bank": {
+            "post": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Time Bank",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Time Bank data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                }
+                            },
+                            "required": [
+                                "user_id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/rabbit": {
+            "post": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Rabbit",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Rabbit data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                }
+                            },
+                            "required": [
+                                "user_id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/fieldError"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/buy-in/{request_id}": {
+            "get": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Get buy-in",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the request buy in",
+                        "name": "request_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request_id": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "game_user": {
+                                            "$ref": "#/definitions/SocketGameUser"
+                                        }
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{id}/calltime": {
+            "put": {
+                "tags" : [
+                    "game"
+                ],
+                "summary": "Calltime",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the game",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Buy-in data",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 318
+                                }
+                            },
+                            "required": [
+                              "user_id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/SocketGameUser"
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags" : [
+                    "user"
+                ],
+                "summary": "Получить информацию о пользователе",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer {access_token}"
+                    },
+                    {
+                        "in": "path",
+                        "description": "Id of the user",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SocketUser"
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Unauthorized"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BadRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The specified resource was not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        
+                                    }
+                                },
+                                "error": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Unauthorized": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "example": "exception"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Your request was made with invalid credentials."
+                }
+            }
+        },
+        "BadRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "example": "exception"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Bad Request. Empty user id"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "example": "exception"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Not found user"
+                }
+            }
+        },
+        "fieldError": {
+            "type": "object",
+            "required": [
+              "field",
+              "message"
+            ],
+            "properties": {
+              "field": {
+                "type": "string",
+                "example": "user_id"
+              },
+              "message": {
+                "type": "string",
+                "example": "Значение «User Id» должно быть целым числом."
+              }
+            }
+        },
+        "SocketClubTable": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 556502
+                },
+                "club_id": {
+                    "type": "integer",
+                    "example": 129
+                },
+                "title": {
+                    "type": "string",
+                    "example": "213123"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "plo_ring_game_plo6"
+                },
+                "is_auto_renew": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "auto_renew_current_count": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "auto_renew_max_count": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "time_left": {
+                    "type": "integer",
+                    "example": 1214283
+                }
+            },
+            "required": [
+              "id",
+              "type",
+              "club_id"
+            ]
+        },
+        "SocketGame": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1272
+                },
+                "table_id": {
+                    "type": "integer",
+                    "example": 625572
+                },
+                "club_id": {
+                    "type": "integer",
+                    "example": 148
+                },
+                "status": {
+                    "type": "string",
+                    "example": "new"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "nlh_ring_game_simple"
+                },
+                "deck": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "2s",
+                        "3s",
+                        "4s",
+                        "5s",
+                        "6s",
+                        "7s",
+                        "8s",
+                        "9s",
+                        "Ts",
+                        "Js",
+                        "Qs",
+                        "Ks",
+                        "As",
+                        "2c",
+                        "3c",
+                        "4c",
+                        "5c",
+                        "6c",
+                        "7c",
+                        "8c",
+                        "9c",
+                        "Tc",
+                        "Jc",
+                        "Qc",
+                        "Kc",
+                        "Ac",
+                        "2d",
+                        "3d",
+                        "4d",
+                        "5d",
+                        "6d",
+                        "7d",
+                        "8d",
+                        "9d",
+                        "Td",
+                        "Jd",
+                        "Qd",
+                        "Kd",
+                        "Ad",
+                        "2h",
+                        "3h",
+                        "4h",
+                        "5h",
+                        "6h",
+                        "7h",
+                        "8h",
+                        "9h",
+                        "Th",
+                        "Jh",
+                        "Qh",
+                        "Kh",
+                        "Ah"
+                      ]
+                    }
+                },
+                "max_table_users_count": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "max_step_time": {
+                    "type": "integer",
+                    "example": 20
+                },
+                "minimal_bet": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "is_buy_in_allowed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "buy_in_min": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "buy_in_max": {
+                    "type": "integer",
+                    "example": 16
+                },
+                "min_vpip": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "is_auto_start": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "auto_start_min_users_count": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "is_auto_renew": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "auto_renew_max_count": {
+                    "type": "integer",
+                    "example": 12
+                },
+                "is_auto_recreate": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_risk_management": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_pass_two_three_times": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "issue_equity": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "commission": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "cap": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "is_calltime": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "calltime_value": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_gps_restriction": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_ip_restriction": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_chat_disallowed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "viewers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SocketViewer"
+                    }
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SocketGameUser"
+                    }
+                },
+                "winners": {
+                    "type": "array",
+                    "items": {
+
+                    }
+                },
+                "state": {
+                    "$ref": "#/definitions/SocketGameState"
+                }
+            },
+            "required": [
+              "id",
+              "table_id",
+              "club_id",
+              "status",
+              "type"
+            ]
+        },
+        "SocketViewer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "club_id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "table_id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "is_removed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "queue_number": {
+                    "type": "integer",
+                    "example": 1
+                }
+            },
+            "required": [
+              "id",
+              "club_id",
+              "table_id",
+              "is_removed"
+            ]
+        },
+        "SocketGameUser": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "balance_current": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "calltime": {
+                    "type": "integer",
+                    "example": 100
+                },
+                "bet": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "cards": {
+                    "type": "array",
+                    "items": {
+                      
+                    }
+                },
+                "is_bet": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_bot": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_fold": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_all_in": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_dealer": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_winner": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_viewer": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_big_blind": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_small_blind": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "is_show_cards": {
+                    "type": "boolean",
+                    "example": null
+                },
+                "cards_title": {
+                    "type": "string",
+                    "example": null
+                },
+                "position": {
+                    "type": "integer",
+                    "example": true
+                },
+                "is_removed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "name": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "image": {
+                    "type": "string",
+                    "example": null
+                },
+                "action_logs": {
+                    "type": "array",
+                    "items": {
+
+                    }
+                }
+            },
+            "required": [
+              "id",
+              "name",
+              "position"
+            ]
+        },
+        "SocketGameState": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "example": null
+                },
+                "main_pot": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "side_pots": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                },
+                "state_type": {
+                    "type": "string",
+                    "example": "GAME_STATE_NEW"
+                },
+                "ante_amount": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "current_bet": {
+                    "type": "number",
+                    "example": 0
+                },
+                "min_raise": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "big_blind_amount": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "small_blind_amount": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "ante_money_amount": {
+                    "type": "number",
+                    "example": 0
+                },
+                "bank_money_amount": {
+                    "type": "number",
+                    "example": 0
+                },
+                "state_money_amount": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "step_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "bet_cycle_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "game_cycle_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "table_cards": {
+                  "type": "array",
+                    "items": {
+
+                    }
+                },
+                "is_game_started": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "game_start_position": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "bet_cycle_end_position_id": {
+                    "type": "integer",
+                    "example": null
+                },
+                "current_step_position_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "datetime",
+                    "example": "2021-02-08 06:09:28+00"
+                },
+                "user_last_turn_time": {
+                    "type": "string",
+                    "format": "datetime",
+                    "example": "2021-02-08 06:09:28+00"
+                }
+            },
+            "required": [
+              "state_type"  
+            ]
+        },
+        "SocketUser": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "first_name": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "middle_name": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "79639570000"
+                },
+                "is_phone_confirmed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "email": {
+                    "type": "string",
+                    "example": "example@yandex.ru"
+                },
+                "photo_id": {
+                    "type": "integer",
+                    "example": 12
+                },
+                "is_enabled": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "group": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "is_vip": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "accept_license_agreement": {
+                            "type": "boolean",
+                            "example": false
+                        }
+                    }
+                },
+                "photo": {
+                    "type": "string",
+                    "example": null
+                }
+            },
+            "required": [
+              "login",
+              "phone",
+              "is_enabled"
+            ]
+        },
+        "Game": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GameUser"
+                    }
+                },
+                "state": {
+                    "$ref": "#/definitions/State"
+                },
+                "winners": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Winner"
+                    }
+                },
+                "rake": {
+                    "type": "array",
+                    "items": {
+                        "$ref" :"#/definitions/Rake"
+                    }
+                },
+                "deck": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "Jh",
+                        "Js",
+                        "Ah",
+                        "As",
+                        "6h",
+                        "Qh",
+                        "5s",
+                        "Ts",
+                        "4c",
+                        "2d",
+                        "4s",
+                        "7h",
+                        "Kh",
+                        "8s",
+                        "7d",
+                        "Qc",
+                        "3s",
+                        "3c",
+                        "9c",
+                        "4h",
+                        "7c",
+                        "5h",
+                        "6c",
+                        "6d",
+                        "Ac",
+                        "Qs",
+                        "Th",
+                        "Td",
+                        "2h",
+                        "2s",
+                        "8c",
+                        "5c",
+                        "9h",
+                        "6s",
+                        "Kc",
+                        "4d",
+                        "9s",
+                        "Jd",
+                        "8h",
+                        "7s",
+                        "Qd",
+                        "8d",
+                        "2c",
+                        "Kd",
+                        "Tc",
+                        "9d",
+                        "Ad",
+                        "Jc"
+                    ]
+                  }
+                },
+                "step_duration": {
+                    "type": "integer",
+                    "example": 20
+                },
+                "minimal_bet": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "start_money": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "max_users_count": {
+                    "type": "integer",
+                    "example": 2
+                }  
+            },
+            "required": [
+              "max_users_count"
+            ]
+        },
+        "Rake": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "number",
+                    "example": 316
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 8
+                }
+            },
+            "required": [
+                "user_id",
+                "amount"
+            ]
+        },
+        "GameUser": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "bet": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "3d",
+                        "5d"
+                      ]
+                    }
+                },
+                "is_bet": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_fold": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_all_in": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_dealer": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_winner": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "cards_title": {
+                    "type": "string",
+                    "example": "High Card"
+                },
+                "is_big_blind": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_show_cards": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_small_blind": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "balance_current": {
+                    "type": "number",
+                    "example": 5
+                },
+                "action_logs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/actionLog"
+                    }
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "name": {
+                    "type": "string",
+                    "example": "nikita2"
+                },
+                "image": {
+                    "type": "string",
+                    "example": null
+                },
+                "position": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "position_name": {
+                    "type": "string",
+                    "example": "BB"
+                },
+                "money": {
+                    "type": "number",
+                    "example": 7.9
+                },
+                "bet": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "is_dealer": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_small_blind": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_big_blind": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_fold": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_all_in": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_bet": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "action_logs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/actionLog"
+                    }
+                },
+                "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "3d",
+                        "5d"
+                      ]
+                    }
+                },
+                "cards_title": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "example": "High Card"
+                        },
+                        "descr": {
+                            "type": "string",
+                            "example": "High Card"
+                        },
+                        "rank": {
+                            "type": "integer",
+                            "example": 5
+                        },
+                        "cards": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": [
+                                "5d",
+                                "3d"
+                              ]
+                            }
+                        }
+                    }
+                },
+                "is_bot": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_viewer": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_show_cards": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "is_winner": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "fold_state_type": {
+                    "type": "string",
+                    "example": null
+                },
+                "diamonds": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "is_rabbit": {
+                    "type": "boolean",
+                    "example": false
+                }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+        },
+        "actionLog": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "example": 318
+                },
+                "name": {
+                    "type": "string",
+                    "example": "SMALL_BLIND"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "title"
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "step_number": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "game_cycle_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "bet_cycle_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "3d",
+                        "5d"
+                      ]
+                    }
+                }  
+            },
+            "required": [
+              "user_id"
+            ]
+        },
+        "State": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "state_type": {
+                    "type": "string",
+                    "example": "GAME_STATE_PREFLOP"
+                },
+                "step_number": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "game_cycle_number": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "bet_cycle_number": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "current_step_position_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "bank_money_amount": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "state_money_amount": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "ante_money_amount": {
+                    "type": "number",
+                    "example": 0
+                },
+                "main_pot": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "side_pots": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        ]
+                    }
+                },
+                "user_last_turn_time": {
+                    "type": "string",
+                    "format": "datetime",
+                    "example": "2021-02-08T06:09:58.000Z"
+                },
+                "current_bet": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "min_raise": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "small_blind_amount": {
+                    "type": "number",
+                    "example": 0.1
+                },
+                "ante_amount": {
+                    "type": "number",
+                    "example": 0
+                },
+                "big_blind_amount": {
+                    "type": "number",
+                    "example": 0.2
+                },
+                "is_game_started": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "game_start_position": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "bet_cycle_end_position_id": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "table_cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "As",
+                        "4h",
+                        "2h",
+                        "Ad",
+                        "Ts"
+                      ]
+                    }
+                },
+                "is_buy_in_allowed": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "buy_in_min": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "buy_in_max": {
+                    "type": "integer",
+                    "example": 16
+                },
+                "is_side_bank_filled": {
+                    "type": "object",
+                    "properties": {
+                        "done": {
+                            "type": "boolean",
+                            "example": false
+                        },
+                        "count": {
+                            "type": "integer",
+                            "example": 16
+                        }
+                    }
+                },
+                "set_winners_done": {
+                    "type": "boolean",
+                    "example": false
+                }
+            },
+            "required": [
+              "state_type"
+            ]
+        },
+        "Winner": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "example": 316
+                },
+                "position": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "amount": {
+                    "type": "number",
+                    "example": 5.1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Two Pair"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Two Pair, A's & 3's"
+                },
+                "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "As",
+                        "Ad",
+                        "3c",
+                        "3d",
+                        "10s"
+                      ]
+                    }
+                },
+                "game_cycle_number": {
+                    "type": "integer",
+                    "example": 3
+                }
+            },
+            "required": [
+              "user_шd",
+              "amount",
+              "position",
+              "game_сycle_number"  
+            ]
+        }
+    },
+    "responses": {
+        "NotFound": {
+            "description": "The specified resource was not found",
+            "schema": {
+                "$ref": "#/definitions/Error"
+            }
+        },
+        "BadRequest": {
+            "description": "Bad request",
+            "schema": {
+                "$ref": "#/definitions/BadRequest"
+            }
+        },
+        "Unauthorized": {
+            "description": "Unauthorized",
+            "headers": {
+                "WWW_Authenticate": {
+                    "type": "string"
+                }
+            },
+            "schema": {
+                "$ref": "#/definitions/Error"
+            }
+        },
+        "fieldError": {
+            "description": "Validation error",
+            "schema": {
+                "$ref": "#/definitions/fieldError"
+            }
+        }
+    }
+}

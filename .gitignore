@@ -1,0 +1,9 @@
+.idea/
+*~
+www/.env
+#.kate-swp
+www/vendor
+www/.bash_history
+
+/www/.composer/
+/.env

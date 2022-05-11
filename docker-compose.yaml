@@ -1,0 +1,132 @@
+version: '3'
+services:
+
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+    volumes:
+      - akpoker-backend-postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6-alpine
+    command:
+      - --appendonly yes
+      - --save 900 1
+    volumes:
+      - akpoker-backend-redis_data:/data
+
+  php-fpm:
+    build:
+      context: ./
+      dockerfile: "${PHP_VERSION}.Dockerfile"
+    expose:
+      - "9000"
+    volumes:
+      - ./www/:/app
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DB_DSN
+      - DB_USERNAME
+      - DB_PASSWORD
+      - REDIS_HOST
+      - REDIS_PORT
+      - REDIS_DATABASE
+
+  workspace:
+    build:
+      context: docker/workspace
+      dockerfile: "${PHP_VERSION}.Dockerfile"
+      args:
+        - INSTALL_BCMATH=${INSTALL_BCMATH}
+        - INSTALL_GMP=${INSTALL_GMP}
+    volumes:
+      - ./www/:/app
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DB_DSN
+      - DB_USERNAME
+      - DB_PASSWORD
+      - REDIS_HOST
+      - REDIS_PORT
+      - REDIS_DATABASE
+
+  yii:
+    build:
+      context: docker/workspace
+      dockerfile: "${PHP_VERSION}.Dockerfile"
+      args:
+        - INSTALL_BCMATH=${INSTALL_BCMATH}
+        - INSTALL_GMP=${INSTALL_GMP}
+    volumes:
+      - ./www/:/app
+    depends_on:
+      - postgres
+      - redis
+    entrypoint: [ "php", "yii" ]
+    environment:
+      - DB_DSN
+      - DB_USERNAME
+      - DB_PASSWORD
+      - REDIS_HOST
+      - REDIS_PORT
+      - REDIS_DATABASE
+
+  supervisor:
+    build:
+      context: ./
+      dockerfile: "supervisor.${PHP_VERSION}.Dockerfile"
+      args:
+        - INSTALL_BCMATH=${INSTALL_BCMATH}
+        - INSTALL_GMP=${INSTALL_GMP}
+    ports:
+      - 9901:9901
+    environment:
+      - DB_DSN
+      - DB_USERNAME
+      - DB_PASSWORD
+      - REDIS_HOST
+      - REDIS_PORT
+      - REDIS_DATABASE
+    volumes:
+      - ./www/:/app
+    command: [ "supervisord", "-c", "/etc/supervisor/supervisord_no_demon.conf" ]
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  nginx:
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - php-fpm
+    ports:
+      - 8001:8001
+    expose:
+      - "8001"
+    volumes:
+      - ./www/:/app
+
+volumes:
+  akpoker-backend-redis_data:
+    external: true
+  akpoker-backend-postgres_data:
+    external: true
+
+
+
+
+

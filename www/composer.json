@@ -1,0 +1,86 @@
+{
+  "name": "megastar/akpoker-backend-project",
+  "description": "AKPoker Backend web server",
+  "type": "project",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4.0",
+    "yiisoft/yii2": "~2.0.14",
+    "yiisoft/yii2-bootstrap": "~2.0.0",
+    "yiisoft/yii2-swiftmailer": "~2.0.0",
+    "yiister/yii2-gentelella": "~1.0",
+    "kartik-v/yii2-widget-fileinput": "^1.0",
+    "zhuravljov/yii2-datetime-widgets": "~1.1.0",
+    "vlucas/phpdotenv": "^2.5",
+    "mito/yii2-sentry": "~1.0.0",
+    "kartik-v/yii2-widget-select2": "@dev",
+    "yiisoft/yii2-httpclient": "^2.0",
+    "php-http/httplug-bundle": "^1.14",
+    "php-http/curl-client": "^1.7",
+    "m-rubin-itmegastar-com/omnipay-sberbank": "3.2.1",
+    "google/apiclient": "^2.2",
+    "yiisoft/yii2-authclient": "^2.2",
+    "vova07/yii2-imperavi-widget": "*",
+    "sizeg/yii2-jwt": "^2.0",
+    "genxoft/yii2-oas3": "*",
+    "yiisoft/yii2-redis": "*",
+    "yii2mod/collection": "*",
+    "ext-pdo": "*",
+    "zircote/swagger-php": "^3.0",
+    "bower-asset/swagger-ui": "*",
+    "sergeymakinen/yii2-telegram-log": "^2.0",
+    "codemix/yii2-excelexport": "^2.7",
+    "tmukherjee13/yii2-reverse-migration": "*",
+    "ext-json": "*",
+    "yiisoft/yii2-queue": "*",
+    "phpoffice/phpspreadsheet": "^1.18"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "~2.0.0",
+    "yiisoft/yii2-gii": "~2.0.0",
+    "yiisoft/yii2-faker": "~2.0.0",
+    "codeception/base": "^2.2.3",
+    "codeception/verify": "~0.3.1",
+    "codeception/specify": "~0.4.3"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "enabled": false
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "yii\\composer\\Installer::postInstall"
+    ],
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject",
+      "yii\\composer\\Installer::postInstall"
+    ]
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "runtime": "0777",
+          "web/assets": "0777",
+          "yii": "0755"
+        }
+      ]
+    },
+    "yii\\composer\\Installer::postInstall": {
+      "generateCookieValidationKey": [
+        "config/web.php"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
